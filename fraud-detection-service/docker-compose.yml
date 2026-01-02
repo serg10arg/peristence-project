@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  fraud_postgres:
+    image: postgres:16-alpine
+    container_name: fraud_db_container
+    environment:
+      POSTGRES_DB: fraud_db
+      POSTGRES_USER: security_admin
+      POSTGRES_PASSWORD: secure_pass
+    ports:
+      - "5435:5432" # Puerto 5435 en tu PC -> 5432 en Docker
+    volumes:
+      - fraud_postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  fraud_postgres_data:
