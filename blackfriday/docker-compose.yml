@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: java_performance_db
+    environment:
+      POSTGRES_DB: performance_lab
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
+    ports:
+      # CAMBIO CRÍTICO:
+      # El primer número (5434) es tu máquina (Host).
+      # El segundo número (5432) es el contenedor (Interno).
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
